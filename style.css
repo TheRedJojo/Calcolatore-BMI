@@ -1,182 +1,130 @@
-/* Reset di base */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Layout principale: centrato verticalmente e orizzontalmente con Flexbox */
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Font senza grazie */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background-color: #F1f3f5;
     color: #1F2328;
     min-height: 100vh;
+    /* Layout centrato orizzontalmente e verticalmente */
     display: flex;
     justify-content: center;
     align-items: center;
+    /* Spazio laterale 60px a destra e a sinistra */
     padding-left: 60px;
     padding-right: 60px;
 }
 
-/* Wrapper principale per la card */
-.container {
+.layout-container {
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
 }
 
-/* Card / Box Bianco */
+/* Card: box bianco largo 360px, padding 24px, border-radius 12px */
 .card {
     background-color: #ffffff;
     width: 360px;
-    max-width: 100%;
     padding: 24px;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(31, 35, 40, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Titolo della pagina */
-.card-title {
+/* Titolo: font-size 32px, margine inferiore 24px */
+h1 {
     font-size: 32px;
-    font-weight: 700;
     margin-bottom: 24px;
     text-align: center;
-    color: #1F2328;
-    line-height: 1.25;
+    line-height: 1.2;
+    font-weight: 700;
 }
 
-/* Form e Gruppi di input */
+/* Ciascun campo occupa una riga intera */
 .form-group {
     margin-bottom: 16px;
+    width: 100%;
 }
 
-.form-label {
+label {
     display: block;
-    width: 100%;
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 6px;
-    color: #1F2328;
 }
 
-.form-input {
+input[type="text"],
+input[type="number"] {
     display: block;
     width: 100%;
     padding: 10px 12px;
-    font-size: 15px;
-    font-family: inherit;
-    color: #1F2328;
-    background-color: #F1f3f5;
+    font-size: 14px;
     border: 1px solid #d0d7de;
-    border-radius: 8px;
+    border-radius: 6px;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    font-family: inherit;
 }
 
-.form-input:focus {
-    background-color: #ffffff;
+input[type="text"]:focus,
+input[type="number"]:focus {
     border-color: #1F2328;
-    box-shadow: 0 0 0 3px rgba(31, 35, 40, 0.15);
 }
 
-/* Pulsante di Submit */
-.btn-submit {
+/* Pulsante di submit: sfondo #1f2328 e colore testo #F1f3f5 */
+button[type="submit"] {
     display: block;
     width: 100%;
-    padding: 12px;
-    margin-top: 20px;
-    background-color: #1F2328;
+    background-color: #1f2328;
     color: #F1f3f5;
+    border: none;
+    padding: 12px;
     font-size: 16px;
     font-weight: 600;
-    font-family: inherit;
-    border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 8px;
+    font-family: inherit;
+    transition: opacity 0.2s ease;
 }
 
-.btn-submit:hover {
-    background-color: #33383f;
+button[type="submit"]:hover {
+    opacity: 0.9;
 }
 
-.btn-submit:active {
-    transform: scale(0.98);
-}
-
-/* Area Risultato */
-.result-box {
-    display: none;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid #e1e4e8;
+/* Box del Risultato generato da PHP */
+.result-card {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 8px;
     text-align: center;
-    animation: fadeIn 0.3s ease-in-out forwards;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.result-user {
-    font-size: 15px;
-    color: #57606a;
+.result-title {
+    font-size: 13px;
+    opacity: 0.85;
     margin-bottom: 4px;
 }
 
 .result-score {
-    font-size: 36px;
-    font-weight: 800;
-    color: #1F2328;
-    line-height: 1.1;
-    margin-bottom: 8px;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 4px 0;
 }
 
-.result-badge {
-    display: inline-block;
-    padding: 6px 14px;
+.result-category {
     font-size: 14px;
     font-weight: 600;
-    border-radius: 20px;
-    margin-top: 4px;
 }
 
-/* Badge Categorie BMI */
-.badge-underweight {
-    background-color: #fff8c5;
-    color: #9a6700;
-}
-
-.badge-normal {
-    background-color: #dafbe1;
-    color: #1a7f37;
-}
-
-.badge-overweight {
-    background-color: #fff8c5;
-    color: #bf8700;
-}
-
-.badge-obese {
-    background-color: #ffebe9;
-    color: #cf222e;
-}
-
-/* Messaggio di Errore */
-.error-message {
-    display: none;
-    color: #cf222e;
+.error-card {
+    margin-top: 16px;
+    padding: 10px 12px;
+    background-color: #ffe3e3;
+    color: #e03131;
+    border-radius: 6px;
     font-size: 13px;
-    margin-top: 12px;
     text-align: center;
-    font-weight: 500;
 }
