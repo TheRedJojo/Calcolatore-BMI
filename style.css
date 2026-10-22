@@ -127,3 +127,56 @@ body {
     }
 }
 
+.result-user {
+    font-size: 15px;
+    color: #57606a;
+    margin-bottom: 4px;
+}
+
+.result-score {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1F2328;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.result-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 20px;
+    margin-top: 4px;
+}
+
+/* Badge Categorie BMI */
+.badge-underweight {
+    background-color: #fff8c5;
+    color: #9a6700;
+}
+
+.badge-normal {
+    background-color: #dafbe1;
+    color: #1a7f37;
+}
+
+.badge-overweight {
+    background-color: #fff8c5;
+    color: #bf8700;
+}
+
+.badge-obese {
+    background-color: #ffebe9;
+    color: #cf222e;
+}
+
+/* Messaggio di Errore */
+.error-message {
+    display: none;
+    color: #cf222e;
+    font-size: 13px;
+    margin-top: 12px;
+    text-align: center;
+    font-weight: 500;
+}

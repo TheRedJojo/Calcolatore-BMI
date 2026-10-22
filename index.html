@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <div class="card">
             <h1 class="card-title">Calcolatore BMI</h1>
@@ -37,7 +36,20 @@
                 <!-- Botone Invia -->
                 <button type="submit" class="btn-submit">Calcola BMI</button>
             </form>
+
+            <!-- Messaggio di errore inline per validazione -->
+            <div id="errorMessage" class="error-message">
+                Inserisci valori validi per tutti i campi.
+            </div>
+
+            <!-- Area di Visualizzazione Risultato -->
+            <div id="resultBox" class="result-box">
+                <p id="resultUser" class="result-user"></p>
+                <div id="resultScore" class="result-score">0.0</div>
+                <div id="resultBadge" class="result-badge">Categoria</div>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
