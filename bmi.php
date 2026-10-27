@@ -10,16 +10,20 @@ $categoria = '';
 $badge_style = '';
 $errore = '';
 
-// Se la pagina viene aperta direttamente senza POST, reindirizza a index.html
+// Se la pagina viene aperta direttamente senza POST, reindirizzo a index.html
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.html');
     exit();
 }
 
+$data = date("d/m/Y");
+$orario = date("H:i:s");
+$ip = $_SERVER['REMOTE_ADDR'];
+
 // Recupero e pulizia input
-$nome = trim($_POST['nome'] ?? '');
-$peso_input = str_replace(',', '.', trim($_POST['peso'] ?? ''));
-$altezza_input = str_replace(',', '.', trim($_POST['altezza'] ?? ''));
+$nome = trim($_POST['nome']);
+$peso_input = str_replace(',', '.', trim($_POST['peso']));
+$altezza_input = str_replace(',', '.', trim($_POST['altezza']));
 
 // Validazione dei campi
 if (empty($nome) || empty($peso_input) || empty($altezza_input)) {
@@ -32,8 +36,8 @@ if (empty($nome) || empty($peso_input) || empty($altezza_input)) {
 
     // Conversione altezza in metri e calcolo BMI
     $altezza_m = $altezza_cm / 100;
-    $bmi = $peso / ($altezza_m * $altezza_m);
-    $bmi_formattato = number_format($bmi, 1, ',', '.');
+    $bmi = $peso / ($altezza_m * $altezza_m); // Corretto operatore di moltiplicazione
+    $bmi_formattato = number_format($bmi, 1);
 
     // Determinazione della fascia BMI e dello stile cromatico della card
     if ($bmi < 18.5) {
@@ -48,6 +52,15 @@ if (empty($nome) || empty($peso_input) || empty($altezza_input)) {
     } else {
         $categoria = 'Obesità';
         $badge_style = 'background-color: #ffe3e3; color: #e03131;';
+    }
+
+    $riga_dati = "$data, $orario, $ip, $nome, $peso_input, $altezza_cm, $bmi_formattato, $categoria\n";
+    // Salvataggio nel file CSV
+    $logF = fopen("log.csv", "a");
+    if ($logF) {
+        // Scrittura formattata in CSV con separatore ';' e a capo automatico
+        fwrite($logF, $riga_dati);
+        fclose($logF);
     }
 }
 ?>
