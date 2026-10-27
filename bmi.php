@@ -26,9 +26,26 @@ $peso_input = str_replace(',', '.', trim($_POST['peso']));
 $altezza_input = str_replace(',', '.', trim($_POST['altezza']));
 
 // Validazione dei campi
-if (empty($nome) || empty($peso_input) || empty($altezza_input)) {
+if (empty($nome) || empty($peso_input) || empty($altezza_input)) { //Se i campi sono vuoti
     $errore = 'Compila tutti i campi richiesti.';
-} elseif (!is_numeric($peso_input) || !is_numeric($altezza_input) || $peso_input <= 0 || $altezza_input <= 0) {
+
+    //Creo delle variabili fittizie perchè non sono valide
+    $nomeNV = "NOT_VALID";
+    $pesoNV = "NOT_VALID";
+    $altezzaNV = "NOT_VALID";
+    $bmiNV = "NOT_VALID";
+    $categoriaNV = "NOT_VALID";
+
+    $riga_dati = "$data, $orario, $ip, $nomeNV, $pesoNV, $altezzaNV, $bmiNV, $categoriaNV\n";
+    // Salvataggio nel file CSV
+    $logF = fopen("log.csv", "a");
+    if ($logF) {
+        // Scrittura formattata in CSV con separatore ';' e a capo automatico
+        fwrite($logF, $riga_dati);
+        fclose($logF);
+    }
+    
+} elseif (!is_numeric($peso_input) || !is_numeric($altezza_input) || $peso_input <= 0 || $altezza_input <= 0) { //Sei i valori non sono validi
     $errore = 'Inserisci valori numerici validi per peso e altezza.';
 } else {
     $peso = floatval($peso_input);
